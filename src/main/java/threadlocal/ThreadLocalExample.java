@@ -7,7 +7,7 @@ public class ThreadLocalExample implements Runnable{
     private static final ThreadLocal<SimpleDateFormat> formatter=ThreadLocal.withInitial(()-> new SimpleDateFormat("yyyyMMDD HHmm"));
 
     public static void main(String[] args) throws InterruptedException {
-        threadlocal.ThreadLocalExample obj=new threadlocal.ThreadLocalExample();
+        ThreadLocalExample obj=new ThreadLocalExample();
         for (int i = 0; i < 10; i++) {
             Thread t=new Thread(obj,""+i);
             Thread.sleep(new Random().nextInt(1000));
