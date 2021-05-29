@@ -1,6 +1,5 @@
 package atomic;
 
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicStampedReference;
 
 public class AtomicStampedReferenceTest {

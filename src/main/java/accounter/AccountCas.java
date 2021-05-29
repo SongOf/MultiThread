@@ -9,7 +9,7 @@ import java.util.concurrent.CountDownLatch;
  * @Date 2021/5/27 23:41
  * @Version 1.0
  */
-public class AccountCas {
+public class AccountCas implements Runnable {
     //关键点一 volatile
     private volatile static int count = 0;
 
@@ -17,14 +17,21 @@ public class AccountCas {
         return count;
     }
 
+    @Override
+    public void run() {
+        int expectCount;
+        while (!compareAndSwap(expectCount = getCount(), expectCount + 1)){}
+    }
+
+    //模拟请求
     public static void request() {
         try {
             Thread.sleep(5);
+            int expectCount;
+            while (!compareAndSwap(expectCount = getCount(), expectCount + 1)){}
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        int expectCount;
-        while (!compareAndSwap(expectCount = getCount(), expectCount + 1)){};
     }
     //关键点二 synchronized
     public static synchronized boolean compareAndSwap(int expectCount, int newCount) {
